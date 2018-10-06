@@ -1,0 +1,40 @@
+﻿<Window x:Class="WorldEditor.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WorldEditor"
+        xmlns:Util="clr-namespace:WorldEditor.Util" 
+        xmlns:Rend="clr-namespace:WorldEditor.DirectX" 
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800" KeyDown="Window_KeyDown">
+    <Window.Resources>
+    </Window.Resources>
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="_File"></MenuItem>
+            <MenuItem Header="_Edit"></MenuItem>
+            <MenuItem Header="_Window">
+                <MenuItem Header="Scene"></MenuItem>
+                <MenuItem Header="Inspector"></MenuItem>
+                <MenuItem Header="Heirarchy"></MenuItem>
+                <MenuItem Header="Project"></MenuItem>
+                <MenuItem Header="Console"></MenuItem>
+            </MenuItem>
+            <MenuItem Header="_Help"></MenuItem>
+        </Menu>
+        <DockPanel>
+            <Util:ResizablePanel  DockPanel.Dock="Left" Height="Auto" Width="300" MinWidth="100"  Borders="0,0,5,0">
+                <ContentControl Name="LeftDock"/>
+            </Util:ResizablePanel>
+            <Util:ResizablePanel  DockPanel.Dock="Right" Height="Auto" Width="300" MinWidth="100"  Borders="5,0,0,0">
+                <ContentControl Name="RightDock"/>
+            </Util:ResizablePanel>
+            <ContentControl Name="BottomDock" DockPanel.Dock="Bottom"/>
+            <ContentControl DockPanel.Dock="Right" Name="CenterDock" MinWidth="100"/>
+            <!--Content Area-->
+            <!--<ContentControl Content="{Binding CurrentPageViewModel}" />-->
+        </DockPanel>
+    </DockPanel>
+
+</Window>
