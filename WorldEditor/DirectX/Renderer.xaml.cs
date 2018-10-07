@@ -14,12 +14,12 @@ namespace WorldEditor.DirectX
     /// </summary>
     public partial class Renderer : UserControl
     {
-        private new Action<object, KeyEventArgs> KeyDown;
+        private new Action<object, KeyEventArgs> KeyDown, KeyUp;
 
         public Renderer()
         {
             InitializeComponent();
-            Loaded += (object sender, RoutedEventArgs e) => { Window.GetWindow(this).KeyDown += OnKeyDownHandler; };
+            Loaded += LoadedHandler;
             //GotFocus += (object sender, RoutedEventArgs e) => { Debug.Write("renderer got focus\n"); };
             //LostFocus += (object sender, RoutedEventArgs e) => { Debug.Write("renderer lost focus\n"); };
             // TODO add focusing to all windows
@@ -34,6 +34,7 @@ namespace WorldEditor.DirectX
 
             Camera camera = new Camera(myViewport3D);
             KeyDown += camera.OnKeyDownHandler;
+            KeyUp += camera.OnKeyUpHandler;
 
             // Define the lights cast in the scene. Without light, the 3D object cannot 
             // be seen. Note: to illuminate an object from additional directions, create 
@@ -131,12 +132,23 @@ namespace WorldEditor.DirectX
             this.Content = myViewport3D;
         }
 
+        private void LoadedHandler(object sender, RoutedEventArgs e)
+        {
+            Window win = Window.GetWindow(this);
+            win.KeyDown += OnKeyDownHandler;
+            win.KeyUp += OnKeyUpHandler;
+        }
+
         public void OnKeyDownHandler(object sender, KeyEventArgs e)
         {
             if (IsFocused)
             {
                 KeyDown?.Invoke(sender, e);
             }
+        }
+        public void OnKeyUpHandler(object sender, KeyEventArgs e)
+        {
+            KeyUp?.Invoke(sender, e);
         }
     }
 }

@@ -54,9 +54,12 @@
                                               Grid.Row="0" Grid.Column="1" ThumbDirection="Top"/>
                         <ContentPresenter Grid.Row="1" Grid.Column="1" Content="{TemplateBinding Content}"  
                                              Margin="{TemplateBinding Padding}"></ContentPresenter>
+                        <!--<ContentControl Grid.Row="1" Grid.Column="1" Content="{TemplateBinding Content}"  
+                                             Margin="{TemplateBinding Padding}"></ContentControl>-->
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
+
 </ResourceDictionary>

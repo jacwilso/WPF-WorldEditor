@@ -8,32 +8,31 @@
         xmlns:Rend="clr-namespace:WorldEditor.DirectX" 
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800" KeyDown="Window_KeyDown">
+
     <Window.Resources>
     </Window.Resources>
+    <Window.CommandBindings>
+    </Window.CommandBindings>
+
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_File"></MenuItem>
             <MenuItem Header="_Edit"></MenuItem>
-            <MenuItem Header="_Window">
+            <MenuItem Header="_Window" Name="windowMenu">
                 <MenuItem Header="Scene"></MenuItem>
                 <MenuItem Header="Inspector"></MenuItem>
-                <MenuItem Header="Heirarchy"></MenuItem>
+                <MenuItem Header="Hierarchy"></MenuItem>
                 <MenuItem Header="Project"></MenuItem>
                 <MenuItem Header="Console"></MenuItem>
             </MenuItem>
             <MenuItem Header="_Help"></MenuItem>
         </Menu>
-        <DockPanel>
-            <Util:ResizablePanel  DockPanel.Dock="Left" Height="Auto" Width="300" MinWidth="100"  Borders="0,0,5,0">
-                <ContentControl Name="LeftDock"/>
-            </Util:ResizablePanel>
-            <Util:ResizablePanel  DockPanel.Dock="Right" Height="Auto" Width="300" MinWidth="100"  Borders="5,0,0,0">
-                <ContentControl Name="RightDock"/>
-            </Util:ResizablePanel>
-            <ContentControl Name="BottomDock" DockPanel.Dock="Bottom"/>
-            <ContentControl DockPanel.Dock="Right" Name="CenterDock" MinWidth="100"/>
-            <!--Content Area-->
-            <!--<ContentControl Content="{Binding CurrentPageViewModel}" />-->
+        <DockPanel Name="dockPanel">
+            <Util:ResizablePanel x:Name="LeftDock" DockPanel.Dock="Left" Width="100" MinWidth="70"  Borders="0,0,5,0" />
+            <Util:ResizablePanel x:Name="RightDock" DockPanel.Dock="Right" Width="100" MinWidth="70"  Borders="5,0,0,0"/>
+            <Util:ResizablePanel x:Name="BottomDock" DockPanel.Dock="Bottom" Height="25" MinHeight="10" Borders="0,5,0,0"/>
+            <Util:ResizablePanel x:Name="TopDock" DockPanel.Dock="Top" Height="25" MinHeight="10" Borders="0,0,0,5"/>
+            <ContentControl Name="CenterDock" MinWidth="100"/>
         </DockPanel>
     </DockPanel>
 

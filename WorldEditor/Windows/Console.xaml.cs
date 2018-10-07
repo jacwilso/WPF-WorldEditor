@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+
 namespace WorldEditor.Windows
 {
     /// <summary>
@@ -23,6 +25,14 @@ namespace WorldEditor.Windows
         public Console()
         {
             InitializeComponent();
+            //Debug.WriteLine("type: " + Type.GetType("Console"));
+            //Type t = GetType();
+            //Debug.WriteLine("Name: {0}", (object)t.Name);
+            //Debug.WriteLine("Full Name: {0}", (object)t.FullName);
+            //Debug.WriteLine("ToString:  {0}", (object)t.ToString());
+            //Debug.WriteLine("Assembly Qualified Name: {0}",
+            //                  (object)t.AssemblyQualifiedName);
+            //Debug.WriteLine("");
         }
     }
 }

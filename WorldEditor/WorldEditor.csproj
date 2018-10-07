@@ -60,6 +60,7 @@
     <Compile Include="DirectX\Input.cs" />
     <Compile Include="DirectX\LineGeometry3D.cs" />
     <Compile Include="Util\CommaSeparatedConverter.cs" />
+    <Compile Include="Util\General.cs" />
     <Compile Include="Util\ResizablePanel.cs" />
     <Compile Include="Util\Resizer.cs" />
     <Compile Include="Windows\Console.xaml.cs">
