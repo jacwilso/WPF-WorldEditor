@@ -85,7 +85,6 @@ namespace WorldEditor.Util
             item.Width -= deltaX;
             return deltaX;
         }
-
     }
 
     [Flags]

@@ -22,7 +22,7 @@ namespace WorldEditor.Windows
     /// </summary>
     public partial class Console : UserControl
     {
-        public Console()
+        public Console() : base()
         {
             InitializeComponent();
             //Debug.WriteLine("type: " + Type.GetType("Console"));

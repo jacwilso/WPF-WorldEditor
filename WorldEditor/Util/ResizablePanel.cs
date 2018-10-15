@@ -10,7 +10,7 @@ namespace WorldEditor.Util
         public Thickness Borders
         {
             get { return (Thickness)GetValue(BordersProperty); }
-            set { SetValue(BordersProperty, value); Debug.WriteLine(value); }
+            set { SetValue(BordersProperty, value); }
         }
 
         static ResizablePanel()

@@ -5,9 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WorldEditor"
         xmlns:Util="clr-namespace:WorldEditor.Util" 
+        xmlns:Windows="clr-namespace:WorldEditor.Windows" 
         xmlns:Rend="clr-namespace:WorldEditor.DirectX" 
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" KeyDown="Window_KeyDown">
+        Title="MainWindow" Height="900" Width="1300" KeyDown="Window_KeyDown">
 
     <Window.Resources>
     </Window.Resources>
@@ -28,10 +29,10 @@
             <MenuItem Header="_Help"></MenuItem>
         </Menu>
         <DockPanel Name="dockPanel">
-            <Util:ResizablePanel x:Name="LeftDock" DockPanel.Dock="Left" Width="100" MinWidth="70"  Borders="0,0,5,0" />
-            <Util:ResizablePanel x:Name="RightDock" DockPanel.Dock="Right" Width="100" MinWidth="70"  Borders="5,0,0,0"/>
-            <Util:ResizablePanel x:Name="BottomDock" DockPanel.Dock="Bottom" Height="25" MinHeight="10" Borders="0,5,0,0"/>
-            <Util:ResizablePanel x:Name="TopDock" DockPanel.Dock="Top" Height="25" MinHeight="10" Borders="0,0,0,5"/>
+            <ContentControl x:Name="LeftDock" DockPanel.Dock="Left" MinWidth="70"/>
+            <ContentControl x:Name="RightDock" DockPanel.Dock="Right" MinWidth="70"/>
+            <ContentControl x:Name="BottomDock" DockPanel.Dock="Bottom" MinHeight="10"/>
+            <ContentControl x:Name="TopDock" DockPanel.Dock="Top" MinHeight="10"/>
             <ContentControl Name="CenterDock" MinWidth="100"/>
         </DockPanel>
     </DockPanel>

@@ -1,0 +1,75 @@
+﻿<UserControl x:Class="WorldEditor.Windows.Dockable"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:core="clr-namespace:System;assembly=mscorlib"
+             xmlns:local="clr-namespace:WorldEditor.Windows"
+             xmlns:Util="clr-namespace:WorldEditor.Util"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <SolidColorBrush x:Key="ContentBorder.Color" Color="DarkGray"/>
+        <core:Double x:Key="ContentBorder.Size">5</core:Double>
+        <SolidColorBrush x:Key="Content.Background" Color="LightGray"/>
+
+        <Style TargetType="{x:Type Util:Resizer}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Util:Resizer}">
+                        <Border Background="{StaticResource ContentBorder.Color}"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <ContextMenu x:Key="ContextMenu">
+            <MenuItem Header="Maximize" Click="MaximizeTab"/>
+            <MenuItem Header="Close Tab" Click="CloseTab"/>
+            <Separator/>
+            <MenuItem Header="Add Tab">
+                <MenuItem Header="Test"/>
+            </MenuItem>
+        </ContextMenu>
+    </UserControl.Resources>
+
+    <Grid Background="{StaticResource Content.Background}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="{Binding GridThickness.Left}"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="{Binding GridThickness.Right}"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="{Binding GridThickness.Top}"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="{Binding GridThickness.Bottom}"/>
+        </Grid.RowDefinitions>
+        <Util:Resizer Cursor="SizeNWSE" Width="{StaticResource ContentBorder.Size}" Height="{StaticResource ContentBorder.Size}"
+                                              Grid.Row="0" Grid.Column="0" ThumbDirection="TopLeft"/>
+        <Util:Resizer Cursor="SizeWE" Width="{StaticResource ContentBorder.Size}"
+                                              Grid.Row="1" Grid.Column="0" ThumbDirection="Left"/>
+        <Util:Resizer Cursor="SizeNESW" Width="{StaticResource ContentBorder.Size}" Height="{StaticResource ContentBorder.Size}"
+                                              Grid.Row="2" Grid.Column="0" ThumbDirection="BottomLeft"/>
+        <Util:Resizer Cursor="SizeNS" Height="{StaticResource ContentBorder.Size}"  
+                                              Grid.Row="2" Grid.Column="1" ThumbDirection="Bottom"/>
+        <Util:Resizer Cursor="SizeNWSE" Width="{StaticResource ContentBorder.Size}" Height="{StaticResource ContentBorder.Size}"
+                                              Grid.Row="2" Grid.Column="2" ThumbDirection="BottomRight"/>
+        <Util:Resizer Cursor="SizeWE" Width="{StaticResource ContentBorder.Size}"
+                                              Grid.Row="1" Grid.Column="2" ThumbDirection="Right"/>
+        <Util:Resizer Cursor="SizeNESW" Width="{StaticResource ContentBorder.Size}" Height="{StaticResource ContentBorder.Size}"
+                                              Grid.Row="0" Grid.Column="2" ThumbDirection="TopRight"/>
+        <Util:Resizer Cursor="SizeNS" Height="{StaticResource ContentBorder.Size}"  
+                                              Grid.Row="0" Grid.Column="1" ThumbDirection="Top"/>
+        <TabControl Name="tabControl" Grid.Row="1" Grid.Column="1" AllowDrop="True" DragDrop.Drop="TabControl_Drop">
+            <TabControl.Resources>
+                <Style TargetType="TabItem">
+                    <Setter Property="AllowDrop" Value="True"/>
+                    <Setter Property="Background" Value="{StaticResource Content.Background}"/>
+                    <Setter Property="Focusable" Value="True"/>
+                    <EventSetter Event="PreviewMouseMove" Handler="TabItem_PreviewMouseMove"/>
+                    <EventSetter Event="Drop" Handler="TabItem_Drop"/>
+                </Style>
+            </TabControl.Resources>
+        </TabControl>
+    </Grid>
+</UserControl>

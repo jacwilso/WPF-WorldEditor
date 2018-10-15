@@ -17,10 +17,10 @@ namespace WorldEditor
             InitializeComponent();
 
             DirectX.Renderer renderer = new DirectX.Renderer();
-            Windows.Console console = new Windows.Console();
-            Windows.Hierarchy hierarchy = new Windows.Hierarchy();
-            Windows.Inspector inspector = new Windows.Inspector();
-            Windows.Project project = new Windows.Project();
+            Windows.Dockable console = new Windows.Dockable(new Windows.Console(), new Thickness(0, 5, 0, 0));
+            Windows.Dockable hierarchy = new Windows.Dockable(new Windows.Hierarchy(), new Thickness(0, 0, 5, 0));
+            Windows.Dockable inspector = new Windows.Dockable(new Windows.Inspector(), new Thickness(5, 0, 0, 0));
+            Windows.Dockable project = new Windows.Dockable(new Windows.Project(), new Thickness(0, 0, 0, 5));
             //Windows.Scene scene = new Windows.Scene();
 
             CenterDock.Content = renderer; // TODO replace with Scene
@@ -52,12 +52,10 @@ namespace WorldEditor
             Type type = Type.GetType(typeString);
             UserControl control = System.Activator.CreateInstance(type) as UserControl;
             // TODO change to open window
-            Util.ResizablePanel panel = new Util.ResizablePanel
+            Windows.Dockable panel = new Windows.Dockable(control, new Thickness(0, 0, 5, 0))
             {
                 Width = 110,
                 MinWidth = 100,
-                Borders = new Thickness(0, 0, 5, 0),
-                Content = control
             };
             DockPanel.SetDock(panel, Dock.Left);
             dockPanel.Children.Insert(0, panel);
