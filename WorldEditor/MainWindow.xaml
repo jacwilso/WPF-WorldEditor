@@ -31,7 +31,7 @@
         <DockPanel Name="dockPanel">
             <ContentControl x:Name="LeftDock" DockPanel.Dock="Left" MinWidth="70"/>
             <ContentControl x:Name="RightDock" DockPanel.Dock="Right" MinWidth="70"/>
-            <ContentControl x:Name="BottomDock" DockPanel.Dock="Bottom" MinHeight="10"/>
+            <ContentControl x:Name="BottomDock" DockPanel.Dock="Bottom" MinWidth="70"/>
             <ContentControl x:Name="TopDock" DockPanel.Dock="Top" MinHeight="10"/>
             <ContentControl Name="CenterDock" MinWidth="100"/>
         </DockPanel>

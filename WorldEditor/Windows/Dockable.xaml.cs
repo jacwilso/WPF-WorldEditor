@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -49,40 +50,26 @@ namespace WorldEditor.Windows
             {
                 this.Height = Double.NaN;
             }
-            AddTab(content);
+            AddTab(content, tabControl);
         }
 
-        private void AddTab(ContentControl content)
+        private void AddTab(ContentControl content, TabControl tabCtrl)
         {
-            var test = Resources["ContextMenu"];
-            ContextMenu menu = Resources["ContextMenu"] as ContextMenu;
-            //ContextMenu menu = new ContextMenu();
-            //MenuItem maximize = new MenuItem()
-            //{
-            //    Header = "Maximize"
-            //};
-            //maximize.MouseDown += MaximizeTab;
-            //menu.Items.Add(maximize);
-            //menu.Items.Add(new Separator());
-            //MenuItem close = new MenuItem()
-            //{
-            //    Header = "Close Tab"
-            //};
-            //close.MouseDown += CloseTab;
-            //menu.Items.Add(close);
-            //MenuItem add = new MenuItem()
-            //{
-            //    Header = "Add Tab"
-            //};
-            //close.MouseDown += AddTab;
-            //menu.Items.Add(add);
+            ContextMenu menu = Resources["TabItemContextMenu"] as ContextMenu;
             TabItem item = new TabItem
             {
-                Header = content.GetType().Name,
                 Content = content,
-                ContextMenu = menu
+                Header = new ContentControl
+                {
+                    Content = content.GetType().Name,
+                    ContextMenu = menu
+                }
             };
-            tabControl.Items.Add(item);
+            int index = tabCtrl.Items.Add(item);
+            tabCtrl.Focus();
+            tabCtrl.SelectedIndex = index;
+            this.MinWidth = Math.Max(80, content.MinWidth);//item.Width;
+            this.MinHeight = Math.Max(40, content.MinHeight + 40);//item.Height;
         }
 
         private void MaximizeTab(object sender, RoutedEventArgs e)
@@ -92,22 +79,27 @@ namespace WorldEditor.Windows
 
         private void CloseTab(object sender, RoutedEventArgs e)
         {
-            var test = e.Source;
             MenuItem item = e.Source as MenuItem;
             TabItem tabItem = ((ContextMenu)item.Parent).PlacementTarget as TabItem;
             var tabCtrl = tabItem.Parent as TabControl;
             tabCtrl.Items.Remove(tabItem);
+            CheckToRemoveDock(tabCtrl);
         }
 
         private void AddTab(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            // This is bad code, it steps up through the "add tab" option to get the tab control is attached to 
+            TabControl tabCtrl = ((TabItem)((ContentControl)((ContextMenu)((MenuItem)((MenuItem)sender).Parent).Parent).PlacementTarget).Parent).Parent as TabControl;
+            string headerString = ((MenuItem)sender).Tag?.ToString() ?? ((MenuItem)sender).Header.ToString();
+            string typeString = "WorldEditor.Windows." + headerString;
+            Type type = Type.GetType(typeString);
+            UserControl content = System.Activator.CreateInstance(type) as UserControl;
+            AddTab(content, tabCtrl);
         }
 
         //https://stackoverflow.com/questions/2247402/implementing-a-multidock-window-system-like-blend-visual-studio-in-wpf
         public void OnDragEnter(object sender, DragEventArgs e)
         {
-            Debug.WriteLine("Hello");
             ContentWindow win = new ContentWindow();
             win.Content = this;
             win.Left = e.GetPosition(this).X;
@@ -122,7 +114,9 @@ namespace WorldEditor.Windows
                 return;
 
             if (Mouse.PrimaryDevice.LeftButton == MouseButtonState.Pressed)
+            {
                 DragDrop.DoDragDrop(tabItem, tabItem, DragDropEffects.All);
+            }
         }
 
         private void TabItem_PreviewMouseMove(object sender, MouseEventArgs e)
@@ -141,8 +135,6 @@ namespace WorldEditor.Windows
 
         private void TabItem_Drop(object sender, DragEventArgs e)
         {
-            var test = e.Source as UserControl;
-            var par = test.Parent;
             if (e.Source is TabItem)
             {
                 var tabTarget = e.Source as TabItem;
@@ -163,6 +155,8 @@ namespace WorldEditor.Windows
                     }
                     tabCtrlTarget.Items.Insert(idx, tabSrc);
                     tabCtrlTarget.SelectedIndex = idx;
+                    CheckToRemoveDock(tabCtrlSrc);
+                    e.Handled = true;
                 }
             }
             else if (e.Source is UserControl && ((UserControl)e.Source).Parent is TabItem)
@@ -174,6 +168,8 @@ namespace WorldEditor.Windows
                 int tabIdx = tabCtrlTarget.Items.Add(tabSrc);
                 tabCtrlTarget.Focus();
                 tabCtrlTarget.SelectedIndex = tabIdx;
+                e.Handled = true;
+                CheckToRemoveDock(tabCtrlSrc);
             }
         }
         private void TabControl_Drop(object sender, DragEventArgs e)
@@ -184,9 +180,29 @@ namespace WorldEditor.Windows
                 var tabSrc = e.Data.GetData(typeof(TabItem)) as TabItem;
                 var tabCtrlSrc = tabSrc.Parent as TabControl;
                 tabCtrlSrc.Items.Remove(tabSrc);
+                CheckToRemoveDock(tabCtrlSrc);
                 int tabIdx = tabCtrlTarget.Items.Add(tabSrc);
                 tabCtrlTarget.Focus();
                 tabCtrlTarget.SelectedIndex = tabIdx;
+                e.Handled = true;
+            }
+        }
+
+        private void CheckToRemoveDock(TabControl tabCtrl)
+        {
+            if (tabCtrl.Items.Count == 0)
+            {
+                var parent = VisualTreeHelper.GetParent(tabCtrl);
+                while (!(parent is ContentControl))
+                {
+                    parent = VisualTreeHelper.GetParent(parent);
+                }
+                parent = VisualTreeHelper.GetParent(parent);
+                parent = VisualTreeHelper.GetParent(parent);
+                var control = parent as ContentControl;
+                var dock = VisualTreeHelper.GetParent(parent) as DockPanel; // dock panel
+                if (parent == null) return;
+                dock.Children.Remove(control);
             }
         }
     }

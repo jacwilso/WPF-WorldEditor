@@ -5,9 +5,60 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:WorldEditor.Windows"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800" Background="LightGray" Focusable="True">
+      d:DesignHeight="450" d:DesignWidth="800" Background="LightGray" Focusable="True" MinHeight="180">
 
     <Grid>
-        <TextBlock>Console</TextBlock>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+        <Border BorderThickness="0,0,0,1" BorderBrush="Black">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                    <TextBlock Width="10"/>
+                    <Button>Clear</Button>
+                    <TextBlock Width="10"/>
+                    <ToggleButton>Collapse</ToggleButton>
+                    <ToggleButton>Clear On Play</ToggleButton>
+                    <ToggleButton>Error Pause</ToggleButton>
+                </StackPanel>
+                <StackPanel Grid.Column="2"  Orientation="Horizontal" HorizontalAlignment="Right">
+                    <!--https://stackoverflow.com/questions/42793845/tinting-an-image-->
+                    <!--https://www.flaticon.com/search?word=info-->
+                    <ToggleButton Padding="5,0,5,0">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/Resources/info.png"/>
+                            <TextBlock Margin="10,0,0,0">0</TextBlock>
+                        </StackPanel>
+                    </ToggleButton>
+                    <ToggleButton Padding="5,0,5,0">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/Resources/warning.png" OpacityMask="Black" />
+                            <TextBlock Margin="10,0,0,0">0</TextBlock>
+                        </StackPanel>
+                    </ToggleButton>
+                    <ToggleButton Padding="5,0,5,0">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/Resources/error.png"/>
+                            <TextBlock Margin="10,0,0,0"> 0
+                            </TextBlock>
+                        </StackPanel>
+                    </ToggleButton>
+                </StackPanel>
+            </Grid>
+        </Border>
+        <Border Grid.Row="2" BorderThickness="0,1,0,1" BorderBrush="Black">
+            <TextBlock Grid.Row="2"/>
+        </Border>
+        <TextBox Grid.Row="3" Margin="10,2,10,2" Width="200" HorizontalAlignment="Left"></TextBox>
     </Grid>
 </UserControl>

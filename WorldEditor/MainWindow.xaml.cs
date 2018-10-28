@@ -25,9 +25,17 @@ namespace WorldEditor
 
             CenterDock.Content = renderer; // TODO replace with Scene
             LeftDock.Content = hierarchy;
+            LeftDock.MinWidth = hierarchy.MinWidth;
+            LeftDock.MinHeight = hierarchy.MinHeight;
             RightDock.Content = inspector;
+            LeftDock.MinWidth = inspector.MinWidth;
+            LeftDock.MinHeight = inspector.MinHeight;
             BottomDock.Content = console;
+            BottomDock.MinWidth = console.MinWidth;
+            BottomDock.MinHeight = console.MinHeight;
             TopDock.Content = project;
+            TopDock.MinWidth = project.MinWidth;
+            TopDock.MinHeight = project.MinHeight;
 
             for (int i = 0; i < windowMenu.Items.Count; i++)
             {

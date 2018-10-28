@@ -8,6 +8,7 @@
              xmlns:Util="clr-namespace:WorldEditor.Util"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+
     <UserControl.Resources>
         <SolidColorBrush x:Key="ContentBorder.Color" Color="DarkGray"/>
         <core:Double x:Key="ContentBorder.Size">5</core:Double>
@@ -23,12 +24,15 @@
             </Setter>
         </Style>
 
-        <ContextMenu x:Key="ContextMenu">
+        <ContextMenu x:Key="TabItemContextMenu">
             <MenuItem Header="Maximize" Click="MaximizeTab"/>
             <MenuItem Header="Close Tab" Click="CloseTab"/>
             <Separator/>
             <MenuItem Header="Add Tab">
-                <MenuItem Header="Test"/>
+                <MenuItem Header="Scene" Click="AddTab"/>
+                <MenuItem Header="Inspector" Click="AddTab"/>
+                <MenuItem Header="Hierarchy" Click="AddTab"/>
+                <MenuItem Header="Project"/>
             </MenuItem>
         </ContextMenu>
     </UserControl.Resources>
