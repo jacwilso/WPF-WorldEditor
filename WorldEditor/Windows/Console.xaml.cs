@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -25,14 +26,50 @@ namespace WorldEditor.Windows
         public Console() : base()
         {
             InitializeComponent();
-            //Debug.WriteLine("type: " + Type.GetType("Console"));
-            //Type t = GetType();
-            //Debug.WriteLine("Name: {0}", (object)t.Name);
-            //Debug.WriteLine("Full Name: {0}", (object)t.FullName);
-            //Debug.WriteLine("ToString:  {0}", (object)t.ToString());
-            //Debug.WriteLine("Assembly Qualified Name: {0}",
-            //                  (object)t.AssemblyQualifiedName);
-            //Debug.WriteLine("");
+        }
+
+        // TODO(Jacob) DUPLICATE CODE
+        public void AddLog(string line)
+        {
+            TextBox box = new TextBox
+            {
+                Background = new SolidColorBrush(Colors.Transparent),
+                IsReadOnly = true,
+                BorderThickness = new Thickness(0),
+                Text = line,
+            };
+            box.GotFocus += Box_GotFocus;
+            box.LostFocus += Box_LostFocus;
+            Log.Children.Add(box);
+
+        }
+
+        // TODO(Jacob) DUPLICATE CODE
+        private void Box_GotFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox box = sender as TextBox;
+            box.Background = new SolidColorBrush(Colors.Blue);
+        }
+
+        // TODO(Jacob) DUPLICATE CODE
+        private void Box_LostFocus(object sender, RoutedEventArgs e)
+        {
+            TextBox box = sender as TextBox;
+            box.Background = new SolidColorBrush(Colors.LightGray);
+        }
+
+        private void ClearClick(object sender, RoutedEventArgs e)
+        {
+            Log.Children.Clear();
+        }
+
+        private void CommandKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key != Key.Enter) return;
+            e.Handled = true;
+            TextBox cmdBox = sender as TextBox;
+            AddLog("Cmd: " + cmdBox.Text);
+            cmdBox.Clear();
         }
     }
 }

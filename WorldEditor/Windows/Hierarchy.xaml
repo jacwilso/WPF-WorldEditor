@@ -5,9 +5,69 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:WorldEditor.Windows"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800" Background="LightGray" Focusable="True">
+      d:DesignHeight="450" d:DesignWidth="800" Background="LightGray" Focusable="True" MinWidth="150">
 
-    <Grid>
-        <TextBlock>Heirarchy</TextBlock>
-    </Grid>
+    <StackPanel>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Menu VerticalAlignment="Center">
+                <MenuItem Header="Create" >
+                    <MenuItem Header="Create Empty" Click="CreateEmpty"/>
+                    <MenuItem Header="Create Empty Child" Click="CreateEmptyChild"/>
+                    <MenuItem Header="3D Object">
+                        <MenuItem Header="Cube"/>
+                        <MenuItem Header="Sphere"/>
+                        <MenuItem Header="Capsule"/>
+                        <MenuItem Header="Cylinder"/>
+                        <MenuItem Header="Plane"/>
+                        <MenuItem Header="Quad"/>
+                        <MenuItem Header="Terrain"/>
+                    </MenuItem>
+                    <MenuItem Header="2D Object">
+                        <MenuItem Header="Sprite"/>
+                        <MenuItem Header="Sprite Mask"/>
+                        <MenuItem Header="Tilemap"/>
+                    </MenuItem>
+                    <MenuItem Header="Effects">
+                        <MenuItem Header="Particle System"/>
+                        <MenuItem Header="Trail"/>
+                        <MenuItem Header="Line"/>
+                    </MenuItem>
+                    <MenuItem Header="Light">
+                        <MenuItem Header="Directional Light"/>
+                        <MenuItem Header="Point Light"/>
+                        <MenuItem Header="Spotlight"/>
+                        <MenuItem Header="Area Light"/>
+                    </MenuItem>
+                    <MenuItem Header="Audio">
+                        <MenuItem Header="Audio Source"/>
+                    </MenuItem>
+                    <MenuItem Header="Video">
+                        <MenuItem Header="Video Player"/>
+                    </MenuItem>
+                    <MenuItem Header="UI">
+                        <MenuItem Header="Text"/>
+                        <MenuItem Header="Image"/>
+                        <MenuItem Header="Button"/>
+                        <MenuItem Header="Toggle"/>
+                        <MenuItem Header="Slider"/>
+                        <MenuItem Header="Scrollbar"/>
+                        <MenuItem Header="Dropdown"/>
+                        <MenuItem Header="Input Field"/>
+                        <MenuItem Header="Canvas"/>
+                        <MenuItem Header="Panel"/>
+                        <MenuItem Header="Scroll View"/>
+                        <MenuItem Header="Event System"/>
+                    </MenuItem>
+                    <MenuItem Header="Camera"/>
+                </MenuItem>
+            </Menu>
+            <TextBox Grid.Column="1" Margin="10,3,10,3">Search...</TextBox>
+        </Grid>
+        <StackPanel Name="HierarchyStack"/>
+    </StackPanel>
 </UserControl>
+    

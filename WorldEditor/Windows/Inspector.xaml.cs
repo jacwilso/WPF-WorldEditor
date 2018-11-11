@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -35,6 +36,18 @@ namespace WorldEditor.Windows
         private void TextBlock_DragEnter(object sender, DragEventArgs e)
         {
             Debug.Write("Drag");
+        }
+
+        private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+
+        private void DropDown_Click(object sender, RoutedEventArgs e)
+        {
+            StackPanel stack = ((Grid)((Button)sender).Parent).Parent as StackPanel;
+            for (int i = 1; i < stack.Children.Count; i++) stack.Children[i].Visibility = (Visibility)(Visibility.Collapsed - stack.Children[1].Visibility);
         }
     }
 }

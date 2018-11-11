@@ -28,8 +28,8 @@ namespace WorldEditor
             LeftDock.MinWidth = hierarchy.MinWidth;
             LeftDock.MinHeight = hierarchy.MinHeight;
             RightDock.Content = inspector;
-            LeftDock.MinWidth = inspector.MinWidth;
-            LeftDock.MinHeight = inspector.MinHeight;
+            RightDock.MinWidth = inspector.MinWidth;
+            RightDock.MinHeight = inspector.MinHeight;
             BottomDock.Content = console;
             BottomDock.MinWidth = console.MinWidth;
             BottomDock.MinHeight = console.MinHeight;

@@ -5,12 +5,131 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:WorldEditor.Windows"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800" Background="LightGray">
+      d:DesignHeight="450" d:DesignWidth="800" Background="LightGray" MinWidth="200">
 
-    <Grid>
-        <!--<TabControl>
-            <TabItem Header="Test"></TabItem>
-        </TabControl>-->
-        <TextBlock DragEnter="TextBlock_DragEnter">Inspector</TextBlock>
-    </Grid>
+    <StackPanel>
+        <Border BorderBrush="Black" BorderThickness="0,0,0,1">
+            <Grid Background="Silver">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Image Source="/Resources/info.png" Grid.RowSpan="2"/>
+                <Grid Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <CheckBox VerticalAlignment="Center"/>
+                    <TextBox Grid.Column="2"></TextBox>
+                </Grid>
+                <StackPanel Grid.Column="3" Orientation="Horizontal">
+                    <CheckBox IsThreeState="True" VerticalAlignment="Center"/>
+                    <TextBlock>Static</TextBlock>
+                    <Button Name="Static">STATIC</Button>
+                    <Popup IsOpen="{Binding ElementName=Static, Path=IsMouseCaptured, Mode=OneWay}">
+                        <ListBox SelectionMode="Multiple">
+                            <ListBoxItem>Nothing</ListBoxItem>
+                            <ListBoxItem>Everything</ListBoxItem>
+                            <ListBoxItem>Lightmap Static</ListBoxItem>
+                            <ListBoxItem>Occluder Static</ListBoxItem>
+                            <ListBoxItem>Batching Static</ListBoxItem>
+                            <ListBoxItem>Navigation Static</ListBoxItem>
+                            <ListBoxItem>Occludee Static</ListBoxItem>
+                            <ListBoxItem>Off Mesh Link Generation</ListBoxItem>
+                            <ListBoxItem>Reflection Probe Static</ListBoxItem>
+                        </ListBox>
+                    </Popup>
+                </StackPanel>
+                <Grid Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label>Tag</Label>
+                    <ComboBox Grid.Column="1">
+                        <ComboBoxItem>Untagged</ComboBoxItem>
+                    </ComboBox>
+                    <Label Grid.Column="2">Layer</Label>
+                    <ComboBox  Grid.Column="3">
+                        <ComboBoxItem>0: Default</ComboBoxItem>
+                    </ComboBox>
+                </Grid>
+            </Grid>
+        </Border>
+        <Border BorderBrush="Black" BorderThickness="0,0,0,1">
+            <StackPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Click="DropDown_Click">V</Button>
+                    <Image Source="/Resources/info.png" Width="10" Grid.Column="1"/>
+                    <Label FontWeight="Bold" Grid.Column="2">Transform</Label>
+                    <Image Source="/Resources/info.png" Width="10" Grid.Column="3"/>
+                    <Image Source="/Resources/info.png" Width="10" Grid.Column="4"/>
+                    <Image Source="/Resources/info.png" Width="10" Grid.Column="5"/>
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Margin="0,0,20,0">
+                        <TextBlock>Position</TextBlock>
+                        <TextBlock>Rotation</TextBlock>
+                        <TextBlock>Scale</TextBlock>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1" Margin="0,0,10,0">
+                        <TextBlock>X</TextBlock>
+                        <TextBlock>X</TextBlock>
+                        <TextBlock>X</TextBlock>
+                    </StackPanel>
+                    <StackPanel Grid.Column="2" Margin="0,0,10,0">
+                        <TextBox PreviewTextInput="NumberValidationTextBox">0</TextBox>
+                        <TextBox PreviewTextInput="NumberValidationTextBox">0</TextBox>
+                        <TextBox PreviewTextInput="NumberValidationTextBox">0</TextBox>
+                    </StackPanel>
+                    <StackPanel Grid.Column="3" Margin="0,0,10,0">
+                        <TextBlock>Y</TextBlock>
+                        <TextBlock>Y</TextBlock>
+                        <TextBlock>Y</TextBlock>
+                    </StackPanel>
+                    <StackPanel Grid.Column="4" Margin="0,0,10,0">
+                        <TextBox PreviewTextInput="NumberValidationTextBox">0</TextBox>
+                        <TextBox PreviewTextInput="NumberValidationTextBox">0</TextBox>
+                        <TextBox PreviewTextInput="NumberValidationTextBox">0</TextBox>
+                    </StackPanel>
+                    <StackPanel Grid.Column="5" Margin="0,0,10,0">
+                        <TextBlock>Z</TextBlock>
+                        <TextBlock>Z</TextBlock>
+                        <TextBlock>Z</TextBlock>
+                    </StackPanel>
+                    <StackPanel Grid.Column="6" Margin="0,0,10,0">
+                        <TextBox PreviewTextInput="NumberValidationTextBox">0</TextBox>
+                        <TextBox PreviewTextInput="NumberValidationTextBox">0</TextBox>
+                        <TextBox PreviewTextInput="NumberValidationTextBox">0</TextBox>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+        </Border>
+    </StackPanel>
 </UserControl>

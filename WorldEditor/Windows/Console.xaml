@@ -7,6 +7,15 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800" Background="LightGray" Focusable="True" MinHeight="180">
 
+    <!--<UserControl.Resources>
+        <TextBox Grid.Row="1" Name="log"
+             Background="Transparent"
+             TextWrapping="Wrap"
+             IsReadOnly="True"
+             SelectionChanged="SelectionChanged"
+             BorderThickness="0"/>
+    </UserControl.Resources>-->
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -25,7 +34,7 @@
                 </Grid.ColumnDefinitions>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                     <TextBlock Width="10"/>
-                    <Button>Clear</Button>
+                    <Button Click="ClearClick">Clear</Button>
                     <TextBlock Width="10"/>
                     <ToggleButton>Collapse</ToggleButton>
                     <ToggleButton>Clear On Play</ToggleButton>
@@ -56,9 +65,10 @@
                 </StackPanel>
             </Grid>
         </Border>
+        <StackPanel Grid.Row="1" Name="Log"/>
         <Border Grid.Row="2" BorderThickness="0,1,0,1" BorderBrush="Black">
             <TextBlock Grid.Row="2"/>
         </Border>
-        <TextBox Grid.Row="3" Margin="10,2,10,2" Width="200" HorizontalAlignment="Left"></TextBox>
+        <TextBox Grid.Row="3" Margin="10,2,10,2" Width="200" HorizontalAlignment="Left" KeyDown="CommandKeyDown"></TextBox>
     </Grid>
 </UserControl>
